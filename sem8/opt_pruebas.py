@@ -34,6 +34,9 @@ N_nodos = 500
 # Caso Estrella (delta pequeño)
 G_star = generar_optimizacion(N_nodos, delta=0.2)
 nx.write_gexf(G_star, "optimizacion_estrella.gexf")
+G_star_hist = generar_optimizacion(N_nodos, delta=0.2)
+
+print("Histograma de grados para el caso Estrella:", nx.degree_histogram(G_star_hist))
 
 # Caso Scale-Free (delta intermedio)
 G_sf = generar_optimizacion(N_nodos, delta=5.0)
