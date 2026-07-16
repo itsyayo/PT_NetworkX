@@ -41,7 +41,7 @@ def generar_optimizacion_2d(N, delta):
             d_ij = math.sqrt((x_new - G.nodes[j]['x'])**2 + (y_new - G.nodes[j]['y'])**2)
             
             # Costo total = Distancia Euclidiana + (delta * Distancia Topológica del candidato)
-            costo = d_ij + (delta * G.nodes[j]['h'])
+            costo = (delta * d_ij) + (G.nodes[j]['h'])
             
             if costo < menor_costo:
                 menor_costo = costo

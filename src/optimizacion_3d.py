@@ -42,7 +42,7 @@ def generar_optimizacion_3d(N, alpha, m=2):
                              (z_new - G.nodes[j]['z'])**2)
             
             # Costo total = Distancia física 3D + (alpha * Distancia Geodésica)
-            costo = d_ij + (alpha * G.nodes[j]['h'])
+            costo = (alpha * d_ij) +  G.nodes[j]['h']
             costos.append((costo, j))
             
         # Ordenar los nodos de menor a mayor costo y tomar los 'm' mejores
