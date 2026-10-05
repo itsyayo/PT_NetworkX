@@ -33,10 +33,10 @@ def kademlia(G_inicial, iteraciones, k=20, bit_space=160):
         bit_space (int): Espacio de direcciones de los identificadores
         
     Retorna:
-        G (nx.DiGraph): Red final donde las aristas dirigidas indican que 
+        G (nx.Graph): Red final donde las aristas indican que 
                         un nodo conoce a otro
     """
-    G = nx.DiGraph(G_inicial)
+    G = nx.Graph(G_inicial)
     
     # Función auxiliar para agregar contactos
     def agregar_contacto(nodo_origen, nodo_destino):
@@ -71,6 +71,7 @@ def kademlia(G_inicial, iteraciones, k=20, bit_space=160):
         
         # Generar un Identificador Kademlia aleatorio
         id_kademlia = random.getrandbits(bit_space)
+        # print(f"Agregando nodo {nuevo_nodo} con ID: {id_kademlia}")
         
         # Evitar colisiones de ID
         while any(datos.get('id') == id_kademlia for n, datos in G.nodes(data=True)):
@@ -105,10 +106,13 @@ def kademlia(G_inicial, iteraciones, k=20, bit_space=160):
 if __name__ == "__main__":
     
     # Red inicial vacía
-    G_ini = nx.DiGraph()
+    G_ini = nx.Graph()
     
     # Ejecutar 150 iteraciones con buckets de tamaño k=5
-    G_final = kademlia(G_ini, iteraciones=150, k=5, bit_space=160)
+    # G_final = kademlia(G_ini, iteraciones=150, k=5, bit_space=160)
+    
+    # Ejecutar 25 iteraciones con buckets de tamaño k=2
+    G_final = kademlia(G_ini, iteraciones=30, k=5, bit_space=160)
     
     print(f"Red Kademlia generada.")
     print(f"Nodos totales: {G_final.number_of_nodes()}")
@@ -116,4 +120,4 @@ if __name__ == "__main__":
     
     import os
     os.makedirs("graficas", exist_ok=True)
-    nx.write_gexf(G_final, "graficas/kademlia_centralizado.gexf")
+    nx.write_gexf(G_final, "graficas/kad5.gexf")

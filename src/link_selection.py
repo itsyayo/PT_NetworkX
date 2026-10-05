@@ -8,30 +8,22 @@ link_selection.py
 import networkx as nx
 import random
 
-def generar_link_selection(N, m):
-    """
-    Genera una red utilizando Link Selection
+def generar_link_selection(N, m=5):
+    # Se inicia con un grafo completo de m+1 nodos
+    G = nx.complete_graph(m + 1) 
     
-    Parámetros:
-        N (int): Número total de nodos.
-        m (int): Número de enlaces nuevos a establecer por cada nodo entrante.
-        
-    Retorna:
-        G (nx.Graph): Grafo resultante.
-    """
-    # Triángulo cerrado
-    G = nx.complete_graph(3)
-    
-    for i in range(len(G.nodes()), N):
+    for i in range(m + 1, N):
         G.add_node(i)
         targets = set()
         
-        while len(targets) < m:
-            # Seleccionamos un ENLACE al azar en lugar de un nodo
-            # Matemáticamente, los hubs están presentes en la mayoría de las aristas
-            arista_aleatoria = random.choice(list(G.edges()))
+        lista_aristas = list(G.edges())
+        
+        # Prevenir colapsos si por algún motivo la red inicial se vació
+        if not lista_aristas:
+            continue
             
-            # Seleccionamos aleatoriamente uno de los dos extremos de la arista
+        while len(targets) < m:
+            arista_aleatoria = random.choice(lista_aristas)
             nodo_destino = random.choice(arista_aleatoria)
             
             if nodo_destino != i:
