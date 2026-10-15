@@ -112,7 +112,7 @@ if __name__ == "__main__":
     # G_final = kademlia(G_ini, iteraciones=150, k=5, bit_space=160)
     
     # Ejecutar 25 iteraciones con buckets de tamaño k=2
-    G_final = kademlia(G_ini, iteraciones=30, k=5, bit_space=160)
+    G_final = kademlia(G_ini, iteraciones=500, k=1, bit_space=160)
     
     print(f"Red Kademlia generada.")
     print(f"Nodos totales: {G_final.number_of_nodes()}")
